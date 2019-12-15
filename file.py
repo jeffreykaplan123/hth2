@@ -55,6 +55,14 @@ scaled_columns = scaler.transform(test[:, columns_to_scale])
 test = test[:, [0, 1, 2, 3]]
 test = np.concatenate([test, encoded_columns], axis=1)
 test = np.concatenate([test, scaled_columns], axis=1)
-for i in range(len(test)):
-    pred = classifier.predict(test)
-    print(pred)
+count0 = 0
+count1 = 0
+
+pred = classifier.predict(test)
+for i in range(len(pred)):
+    if pred[i] == 1:
+        count1 += 1
+    else:
+        count0 += 1
+counttotal = (count0/(count1+count0))*10
+print('safety score (out of 10):  ' + str(counttotal))
